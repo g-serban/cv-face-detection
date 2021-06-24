@@ -3,7 +3,7 @@ import time
 import cv2
 import mediapipe as mp
 
-cap = cv2.VideoCapture("Videos/2.mp4")
+cap = cv2.VideoCapture("Videos/1.mp4")
 mp_face_detection = mp.solutions.face_detection
 face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.65)
 mp_draw = mp.solutions.drawing_utils
@@ -19,6 +19,7 @@ while True:
     if results.detections:
         for id, detection in enumerate(results.detections):
             # mp_draw.draw_detection(img, detection)
+
             bounding_box_class = detection.location_data.relative_bounding_box
             img_height, img_width, img_channel = img.shape
             bounding_box = int(bounding_box_class.xmin * img_width), int(bounding_box_class.ymin * img_height), \
@@ -35,4 +36,3 @@ while True:
     cv2.imshow("Video", img)
     cv2.waitKey(1)
 
-# TODO 1h:52m
